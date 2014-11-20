@@ -24,18 +24,20 @@ for things in soup.find_all('h3'):
     for thing in things.stripped_strings:
         string_thing = unicode(thing)
         linet = u' '.join([linet,string_thing])
+        print linet
     if checker in linet:
         line.append(linet)
         i = i + 1
-## open database
-db = sqlite3.connect('c:/quotes.sqlite')
+    linet = u''
+#### open database
+db = sqlite3.connect('c:/quoter.sqlite')
 cursor = db.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS quotes(id INTEGER PRIMARY KEY, quoted TEXT unique,
                 thematics TEXT, lang TEXT)''')
-db.commit
+db.commit()
 
 for k in range(1,i-1):
-## test to check only quotes are scraped
+ ##test to check only quotes are scraped
 ##    print repr(line[k])
 ##print repr(u'" ')
     try:
